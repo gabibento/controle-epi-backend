@@ -4,8 +4,9 @@ import com.java.controleEpi.entities.Epi;
 import com.java.controleEpi.repositories.EpiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EpiService {
 
     @Autowired
