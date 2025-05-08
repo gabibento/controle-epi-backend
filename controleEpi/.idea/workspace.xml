@@ -4,6 +4,7 @@
     <list default="true" id="c40d2419-0665-44b6-a493-eb6b3fef0d15" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controleEpi/src/main/java/com/java/controleEpi/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/controleEpi/src/main/java/com/java/controleEpi/config/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
