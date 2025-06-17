@@ -22,7 +22,7 @@ public class JwtService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
 
             return JWT.create()
-                    .withIssuer("dailytasks")
+                    .withIssuer("controle-epi")
                     .withSubject(user.getUsername())
                     .withExpiresAt(getExpirationDate())
                     .sign(algorithm);
@@ -36,7 +36,7 @@ public class JwtService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
 
             return JWT.require(algorithm)
-                    .withIssuer("dailytasks")
+                    .withIssuer("controle-epi")
                     .build()
                     .verify(token)
                     .getSubject();
