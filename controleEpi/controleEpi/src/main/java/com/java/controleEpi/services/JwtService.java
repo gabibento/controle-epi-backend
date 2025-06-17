@@ -1,47 +1,51 @@
 package com.java.controleEpi.services;
 
 import com.java.controleEpi.entities.User;
-import jakarta.annotation.PostConstruct;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 
-import java.security.Key;
-import java.util.Date;
-
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 @Service
 public class JwtService {
+
     @Value("${api.security.token.secret}")
     private String secret;
 
-    private Key key;
+    public String generateToken(User user){
+        try{
+            Algorithm algorithm = Algorithm.HMAC256(secret);
 
-    @PostConstruct
-    public void init() {
-        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+            return JWT.create()
+                    .withIssuer("dailytasks")
+                    .withSubject(user.getUsername())
+                    .withExpiresAt(getExpirationDate())
+                    .sign(algorithm);
+        }catch (JWTCreationException exception){
+            throw new RuntimeException("Error while generating token: " + exception);
+        }
     }
 
-    public String generateToken(User user) {
-        long expirationMillis = 1000 * 60 * 60 * 24 * 7;
+    public String validateToken(String token){
+        try{
+            Algorithm algorithm = Algorithm.HMAC256(secret);
 
-        return Jwts.builder()
-                .setSubject(user.getUsername())
-                .setIssuer("bookstore")
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expirationMillis))
-                .claim("roles", user.getRole())
-                .signWith(key, SignatureAlgorithm.HS256)
-                .compact();
+            return JWT.require(algorithm)
+                    .withIssuer("dailytasks")
+                    .build()
+                    .verify(token)
+                    .getSubject();
+        }catch (JWTVerificationException exception){
+            throw new RuntimeException("Error validating token " + exception);
+        }
     }
 
-    public String getUsernameFromToken(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+    private Instant getExpirationDate(){
+        return LocalDateTime.now().plusDays(14).toInstant(ZoneOffset.of("-03:00"));
     }
 }
