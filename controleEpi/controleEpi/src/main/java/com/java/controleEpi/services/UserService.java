@@ -6,13 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public ResponseEntity<User> createUser(User user){
-        userRepository.save(user);
-        return ResponseEntity.ok().body(user);
+    public List<User> findAll(){
+        return userRepository.findAll();
+    }
+    public User findByEmail(String email){
+        return userRepository.findByEmail(email).orElseThrow();
+    }
+    public List<User> searchByName(String name){
+        return userRepository.findByName(name).orElseThrow();
     }
 }
