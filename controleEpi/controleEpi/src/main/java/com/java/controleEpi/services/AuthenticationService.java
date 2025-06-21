@@ -29,8 +29,9 @@ public class AuthenticationService {
         }
         String encryptedPassword = new BCryptPasswordEncoder().encode(request.getPassword());
 
-        userRepository.save(new User(request.getName(), request.getEmail(), encryptedPassword, Role.ROLE_USER));
+        userRepository.save(new User(request.getName(), request.getEmail(), encryptedPassword, request.getRole()));
 
+        System.out.println(request.getRole());
         return authenticate(request);
     }
 

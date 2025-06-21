@@ -24,6 +24,7 @@ public class JwtService {
             return JWT.create()
                     .withIssuer("controle-epi")
                     .withSubject(user.getUsername())
+                    .withClaim("role", user.getRole().name())
                     .withExpiresAt(getExpirationDate())
                     .sign(algorithm);
         }catch (JWTCreationException exception){
