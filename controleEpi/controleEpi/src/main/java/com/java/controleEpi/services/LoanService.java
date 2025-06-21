@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -49,5 +50,8 @@ public class LoanService {
         loanRepository.save(loan);
 
         return ResponseEntity.ok().body(loanDTO);
+    }
+    public List<Loan> findByEpi(Long id){
+        return loanRepository.findByEpi(epiRepository.findById(id).orElse(null));
     }
 }
