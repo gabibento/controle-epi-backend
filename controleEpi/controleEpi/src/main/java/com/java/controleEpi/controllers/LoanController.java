@@ -1,6 +1,7 @@
 package com.java.controleEpi.controllers;
 
 import com.java.controleEpi.dtos.LoanDTO;
+import com.java.controleEpi.dtos.LoanResponseDTO;
 import com.java.controleEpi.entities.Loan;
 import com.java.controleEpi.services.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,12 @@ public class LoanController {
     public ResponseEntity<?> createLoan(@RequestBody LoanDTO loanDTO){
         return loanService.createLoan(loanDTO);
     }
+    @GetMapping
+    public List<LoanResponseDTO> getAll(){
+        return loanService.getAll();
+    }
     @GetMapping("/epi/{id}")
-    public List<Loan> findByEpi(@PathVariable("id") Long id){
+    public List<LoanResponseDTO> findByEpi(@PathVariable("id") Long id){
         return loanService.findByEpi(id);
     }
 }

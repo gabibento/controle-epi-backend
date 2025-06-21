@@ -1,6 +1,7 @@
 package com.java.controleEpi.services;
 
 import com.java.controleEpi.dtos.LoanDTO;
+import com.java.controleEpi.dtos.LoanResponseDTO;
 import com.java.controleEpi.entities.Epi;
 import com.java.controleEpi.entities.Loan;
 import com.java.controleEpi.entities.User;
@@ -51,7 +52,14 @@ public class LoanService {
 
         return ResponseEntity.ok().body(loanDTO);
     }
-    public List<Loan> findByEpi(Long id){
-        return loanRepository.findByEpi(epiRepository.findById(id).orElse(null));
+    public List<LoanResponseDTO> getAll(){
+        return loanRepository.findAll().stream()
+                .map(LoanResponseDTO::new)
+                .toList();
+    }
+    public List<LoanResponseDTO> findByEpi(Long id){
+        return loanRepository.findByEpi(epiRepository.findById(id).orElse(null)).stream()
+                .map(LoanResponseDTO::new)
+                .toList();
     }
 }
