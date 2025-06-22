@@ -23,4 +23,9 @@ public class EpiController {
     public List<Epi> findAll() {
         return epiService.findAll();
     }
+
+    @GetMapping("/{id}")
+    public Epi findById(@PathVariable("id") Long id){
+        return epiService.findById(id).orElse(null);
+    }
 }
