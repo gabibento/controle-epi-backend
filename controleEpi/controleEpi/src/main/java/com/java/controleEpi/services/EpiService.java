@@ -22,4 +22,8 @@ public class EpiService {
     public List<Epi> findAll() {
         return epiRepository.findAll();
     }
+
+    public List<Epi> findByName(String name) {
+        return  epiRepository.findByName(name).orElseThrow();
+    }
 }

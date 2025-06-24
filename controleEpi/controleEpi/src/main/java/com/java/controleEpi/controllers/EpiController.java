@@ -23,4 +23,9 @@ public class EpiController {
     public List<Epi> findAll() {
         return epiService.findAll();
     }
+
+    @GetMapping("/name")
+    public List<Epi> findByName(@RequestParam String name) {
+        return  epiService.findByName(name);
+    }
 }
