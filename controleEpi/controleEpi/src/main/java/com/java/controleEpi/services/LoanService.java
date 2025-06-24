@@ -40,11 +40,13 @@ public class LoanService {
         if (epiOpt.isEmpty()) {
             return ResponseEntity.badRequest().body("EPI not found");
         }
+        Epi epi = epiOpt.get();
+        epi.setQuantity(epi.getQuantity() - 1);
 
         Loan loan = new Loan();
         loan.setId(loanDTO.getId());
         loan.setUser(userOpt.get());
-        loan.setEpi(epiOpt.get());
+        loan.setEpi(epi);
         loan.setPickupDate(loanDTO.getPickupDate());
         loan.setDueDate(loanDTO.getDueDate());
 
