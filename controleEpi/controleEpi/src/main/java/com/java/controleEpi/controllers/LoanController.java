@@ -29,4 +29,8 @@ public class LoanController {
     public List<LoanResponseDTO> findByEpi(@PathVariable("id") Long id){
         return loanService.findByEpi(id);
     }
+    @GetMapping("/user/{id}")
+    public List<LoanResponseDTO> findByUser(@PathVariable("id") Long id){
+        return loanService.findByUser(id);
+    }
 }

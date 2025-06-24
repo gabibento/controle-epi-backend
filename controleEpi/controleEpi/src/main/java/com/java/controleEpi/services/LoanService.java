@@ -62,4 +62,10 @@ public class LoanService {
                 .map(LoanResponseDTO::new)
                 .toList();
     }
+    public List<LoanResponseDTO> findByUser(Long id){
+        return loanRepository.findByUser(userRepository.findById(id).orElse(null))
+                .stream()
+                .map(LoanResponseDTO::new)
+                .toList();
+    }
 }
