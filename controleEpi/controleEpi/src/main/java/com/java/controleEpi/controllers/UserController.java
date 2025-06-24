@@ -18,6 +18,10 @@ public class UserController {
     public List<User> findAll(){
         return userService.findAll();
     }
+    @GetMapping("/{id}")
+    public User findById(@PathVariable("id") Long id){
+        return userService.findById(id);
+    }
     @GetMapping("/email")
     public User findByEmail(@RequestParam String email){
         return userService.findByEmail(email);
