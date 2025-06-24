@@ -1,9 +1,20 @@
 package com.java.controleEpi.dtos;
 
+import com.java.controleEpi.entities.Role;
+
 public class AuthenticationRequestDTO {
     private String name;
     private String email;
     private String password;
+    private Role role;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public String getName() {
         return name;
@@ -28,4 +39,5 @@ public class AuthenticationRequestDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }
