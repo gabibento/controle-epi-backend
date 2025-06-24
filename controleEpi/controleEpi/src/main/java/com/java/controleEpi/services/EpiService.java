@@ -23,7 +23,11 @@ public class EpiService {
         return epiRepository.findAll();
     }
 
+    public Epi findById(Long id) {
+        return epiRepository.findById(id).orElseThrow();
+    }
+
     public List<Epi> findByName(String name) {
-        return  epiRepository.findByName(name).orElseThrow();
+        return epiRepository.findByName(name).orElseThrow();
     }
 }
