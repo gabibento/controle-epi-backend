@@ -31,6 +31,16 @@ public class EpiController {
 
     @GetMapping("/name")
     public List<Epi> findByName(@RequestParam String name) {
-        return  epiService.findByName(name);
+        return epiService.findByName(name);
+    }
+
+    @PatchMapping
+    public Epi updateEpi(@RequestParam Long id, int quantity) {
+        return epiService.updateEpi(id, quantity);
+    }
+
+    @DeleteMapping
+    public void removeEpi(@RequestParam Long id) {
+        epiService.removeEpi(id);
     }
 }

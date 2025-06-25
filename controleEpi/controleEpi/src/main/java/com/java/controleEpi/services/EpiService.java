@@ -24,10 +24,21 @@ public class EpiService {
     }
 
     public Epi findById(Long id) {
-        return epiRepository.findById(id).orElseThrow();
+        return epiRepository.findById(id).orElseThrow(() -> new RuntimeException("EPI não encontrado."));
     }
 
     public List<Epi> findByName(String name) {
         return epiRepository.findByName(name).orElseThrow();
+    }
+
+    public Epi updateEpi(Long id, int quantity) {
+        Epi epi = epiRepository.findById(id).orElseThrow();
+        epi.setQuantity(quantity);
+        return epiRepository.save(epi);
+    }
+
+    public void removeEpi(Long id) {
+        Epi epi = findById(id);
+        epiRepository.delete(epi);
     }
 }
