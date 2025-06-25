@@ -8,6 +8,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/devolutions")
 public class DevolutionController {
 
-    @Autowired
-
 }

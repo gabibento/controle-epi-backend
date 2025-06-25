@@ -35,7 +35,7 @@ public class EpiController {
     }
 
     @PatchMapping
-    public Epi updateEpi(@RequestParam Long id, int quantity) {
+    public Epi updateEpi(@RequestParam Long id, @RequestBody int quantity) {
         return epiService.updateEpi(id, quantity);
     }
 
