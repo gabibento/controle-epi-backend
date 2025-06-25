@@ -26,6 +26,21 @@ public class EpiController {
 
     @GetMapping("/{id}")
     public Epi findById(@PathVariable("id") Long id){
-        return epiService.findById(id).orElse(null);
+        return epiService.findById(id);
+    }
+
+    @GetMapping("/name")
+    public List<Epi> findByName(@RequestParam String name) {
+        return epiService.findByName(name);
+    }
+
+    @PatchMapping
+    public Epi updateEpi(@RequestParam Long id, int quantity) {
+        return epiService.updateEpi(id, quantity);
+    }
+
+    @DeleteMapping
+    public void removeEpi(@RequestParam Long id) {
+        epiService.removeEpi(id);
     }
 }

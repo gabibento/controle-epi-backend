@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EpiService {
@@ -24,7 +23,22 @@ public class EpiService {
         return epiRepository.findAll();
     }
 
-    public Optional<Epi> findById(Long id){
-        return epiRepository.findById(id);
+    public Epi findById(Long id) {
+        return epiRepository.findById(id).orElseThrow(() -> new RuntimeException("EPI não encontrado."));
+    }
+
+    public List<Epi> findByName(String name) {
+        return epiRepository.findByName(name).orElseThrow();
+    }
+
+    public Epi updateEpi(Long id, int quantity) {
+        Epi epi = epiRepository.findById(id).orElseThrow();
+        epi.setQuantity(quantity);
+        return epiRepository.save(epi);
+    }
+
+    public void removeEpi(Long id) {
+        Epi epi = findById(id);
+        epiRepository.delete(epi);
     }
 }
