@@ -8,11 +8,13 @@ import com.java.controleEpi.repositories.DevolutionRepository;
 import com.java.controleEpi.repositories.LoanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class DevolutionService {
     @Autowired
     DevolutionRepository devolutionRepository;
@@ -41,6 +43,22 @@ public class DevolutionService {
         return devolutionRepository.findAll().stream()
                 .map(DevolutionResponseDTO::new)
                 .toList();
+    }
+
+    public List<DevolutionResponseDTO> findByLoan(Long id){
+        return devolutionRepository.findByLoan(loanRepository.findById(id).orElse(null))
+                .stream()
+                .map(DevolutionResponseDTO::new)
+                .toList();
+    }
+
+    public Devolution findById(Long id){
+        return devolutionRepository.findById(id).orElseThrow(()-> new RuntimeException("Devolução não encontrada!"));
+    }
+
+    public void removeDevolution(Long id){
+        Devolution devolution = findById(id);
+        devolutionRepository.delete(devolution);
     }
 
 }

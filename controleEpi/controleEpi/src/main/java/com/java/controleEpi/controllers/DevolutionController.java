@@ -1,11 +1,32 @@
 package com.java.controleEpi.controllers;
 
+import com.java.controleEpi.dtos.DevolutionDTO;
+import com.java.controleEpi.dtos.DevolutionResponseDTO;
+import com.java.controleEpi.services.DevolutionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/devolutions")
 public class DevolutionController {
 
+    @Autowired
+    DevolutionService devolutionService;
+
+    @PostMapping
+    public ResponseEntity<?> createDevolution (@RequestBody DevolutionDTO devolutionDTO){
+        return devolutionService.createDevolution(devolutionDTO);
+    }
+    @GetMapping
+    public List<DevolutionResponseDTO> getAll(){
+        return devolutionService.getAll();
+    }
+
+    @GetMapping("/loan/{id}")
+    public List<DevolutionResponseDTO> findByLoan(@PathVariable("id") Long id){
+        return devolutionService.findByLoan(id);
+    }
 }
