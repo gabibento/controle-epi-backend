@@ -25,6 +25,8 @@ public class LoanController {
     public List<LoanResponseDTO> getAll(){
         return loanService.getAll();
     }
+    @GetMapping
+    public Loan findById (@PathVariable ("id") Long id){return loanService.findById(id);}
     @GetMapping("/epi/{id}")
     public List<LoanResponseDTO> findByEpi(@PathVariable("id") Long id){
         return loanService.findByEpi(id);
@@ -33,4 +35,6 @@ public class LoanController {
     public List<LoanResponseDTO> findByUser(@PathVariable("id") Long id){
         return loanService.findByUser(id);
     }
+    @DeleteMapping
+    public void removeLoan(@RequestParam Long id){loanService.removeLoan(id);}
 }

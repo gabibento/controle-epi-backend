@@ -3,6 +3,7 @@ package com.java.controleEpi.services;
 import com.java.controleEpi.dtos.DevolutionDTO;
 import com.java.controleEpi.dtos.DevolutionResponseDTO;
 import com.java.controleEpi.entities.Devolution;
+import com.java.controleEpi.entities.Epi;
 import com.java.controleEpi.entities.Loan;
 import com.java.controleEpi.repositories.DevolutionRepository;
 import com.java.controleEpi.repositories.LoanRepository;
@@ -33,6 +34,9 @@ public class DevolutionService {
         devolution.setId(devolutionDTO.getId());
         devolution.setLoan(loanOpt.get());
         devolution.setDevolutionDate(devolutionDTO.getDevolutionDate());
+
+        Epi epi = loanOpt.get().getEpi();
+        epi.setQuantity(epi.getQuantity() + 1);
 
         devolutionRepository.save(devolution);
 

@@ -70,4 +70,12 @@ public class LoanService {
                 .map(LoanResponseDTO::new)
                 .toList();
     }
+    public Loan findById(Long id){
+        return loanRepository.findById(id).orElseThrow(() -> new RuntimeException("Empréstimo não encontrado!"));
+    }
+
+    public void removeLoan(Long id){
+        Loan loan = findById(id);
+        loanRepository.delete(loan);
+    }
 }
