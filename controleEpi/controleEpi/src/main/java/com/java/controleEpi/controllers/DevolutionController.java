@@ -25,8 +25,9 @@ public class DevolutionController {
     public List<DevolutionResponseDTO> getAll(){
         return devolutionService.getAll();
     }
-    @GetMapping
+    @GetMapping("/{id}")
     public Devolution findById(@PathVariable("id") Long id){ return devolutionService.findById(id);}
+
     @GetMapping("/loan/{id}")
     public List<DevolutionResponseDTO> findByLoan(@PathVariable("id") Long id){
         return devolutionService.findByLoan(id);
