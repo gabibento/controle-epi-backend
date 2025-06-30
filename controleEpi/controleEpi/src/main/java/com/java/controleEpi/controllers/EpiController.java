@@ -1,5 +1,6 @@
 package com.java.controleEpi.controllers;
 
+import com.java.controleEpi.dtos.EpiUpdateDTO;
 import com.java.controleEpi.entities.Epi;
 import com.java.controleEpi.services.EpiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class EpiController {
     }
 
     @PatchMapping
-    public Epi updateEpi(@RequestParam Long id, @RequestBody int quantity) {
+    public Epi updateEpi(@RequestParam Long id, @RequestBody EpiUpdateDTO quantity) {
         return epiService.updateEpi(id, quantity);
     }
 
