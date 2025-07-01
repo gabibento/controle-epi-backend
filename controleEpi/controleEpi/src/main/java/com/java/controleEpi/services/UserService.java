@@ -1,5 +1,6 @@
 package com.java.controleEpi.services;
 
+import com.java.controleEpi.dtos.UserUpdateDTO;
 import com.java.controleEpi.entities.Devolution;
 import com.java.controleEpi.entities.Epi;
 import com.java.controleEpi.entities.Loan;
@@ -42,9 +43,9 @@ public class UserService {
     }
 
     @Transactional
-    public User updateEmail(Long id, String email) {
+    public User updateEmail(Long id, UserUpdateDTO dto) {
         User user = userRepository.findById(id).orElseThrow();
-        user.setEmail(email);
+        user.setEmail(dto.getEmail());
         return userRepository.save(user);
     }
 

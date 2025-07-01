@@ -1,5 +1,6 @@
 package com.java.controleEpi.controllers;
 
+import com.java.controleEpi.dtos.UserUpdateDTO;
 import com.java.controleEpi.entities.Loan;
 import com.java.controleEpi.entities.Devolution;
 import com.java.controleEpi.entities.User;
@@ -37,8 +38,8 @@ public class UserController {
     }
 
     @PatchMapping
-    public User updateEmail(@RequestParam Long id, @RequestParam String email) {
-        return userService.updateEmail(id, email);
+    public User updateEmail(@RequestParam Long id, @RequestBody UserUpdateDTO dto) {
+        return userService.updateEmail(id, dto);
     }
 
     @DeleteMapping
