@@ -25,6 +25,7 @@ public class JwtService {
                     .withIssuer("controle-epi")
                     .withSubject(user.getUsername())
                     .withClaim("role", user.getRole().name())
+                    .withClaim("id", user.getId())
                     .withExpiresAt(getExpirationDate())
                     .sign(algorithm);
         }catch (JWTCreationException exception){

@@ -40,8 +40,8 @@ public class EpiController {
         return epiService.updateEpi(id, quantity);
     }
 
-    @DeleteMapping
-    public void removeEpi(@RequestParam Long id) {
+    @DeleteMapping("/{id}")
+    public void removeEpi(@PathVariable Long id) {
         epiService.removeEpi(id);
     }
 }

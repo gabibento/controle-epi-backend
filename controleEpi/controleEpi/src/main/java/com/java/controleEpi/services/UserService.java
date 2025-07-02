@@ -49,23 +49,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void removeUser(Long id, Loan loan, Devolution devolution) {
-        User user = findById(id);
-        List<Loan> loans = loanRepository.findByUser(user);
-
-        if(loans.isEmpty()) {
-            userRepository.delete(user);
-            return;
-        }
-
-        /*for(Loan loan : loans) {
-            boolean hasDevolution = devolutionRepository.findByLoan(loan.getUser());
-
-            if(!hasDevolution) {
-                throw new RuntimeException("Usuário não pode ser removido. Existem empréstimos pendentes de devolução.");
-            }
-        }*/
-
-        userRepository.delete(user);
+    public void removeUser(Long id) {
+        userRepository.deleteById(id);
     }
 }

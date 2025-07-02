@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface DevolutionRepository extends JpaRepository<Devolution, Long> {
-    List<Devolution> findByLoan(Loan loan);
+    Devolution findByLoan(Loan loan);
 }

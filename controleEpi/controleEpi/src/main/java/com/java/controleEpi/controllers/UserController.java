@@ -42,8 +42,8 @@ public class UserController {
         return userService.updateEmail(id, dto);
     }
 
-    @DeleteMapping
-    public void removeUser(@RequestParam Long id, @RequestParam Loan loan, @RequestParam Devolution devolution) {
-        userService.removeUser(id, loan, devolution);
+    @DeleteMapping("/{id}")
+    public void removeUser(@PathVariable Long id) {
+        userService.removeUser(id);
     }
 }

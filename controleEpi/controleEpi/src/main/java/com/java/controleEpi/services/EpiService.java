@@ -39,7 +39,6 @@ public class EpiService {
     }
 
     public void removeEpi(Long id) {
-        Epi epi = findById(id);
-        epiRepository.delete(epi);
+        epiRepository.deleteById(id);
     }
 }

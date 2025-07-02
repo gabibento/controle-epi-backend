@@ -49,11 +49,18 @@ public class DevolutionService {
                 .toList();
     }
 
-    public List<DevolutionResponseDTO> findByLoan(Long id){
-        return devolutionRepository.findByLoan(loanRepository.findById(id).orElse(null))
-                .stream()
-                .map(DevolutionResponseDTO::new)
-                .toList();
+    public DevolutionResponseDTO findByLoan(Long id){
+        var loan = loanRepository.findById(id).orElse(null);
+        if (loan == null) {
+            throw new RuntimeException("Empréstimo não encontrado");
+        }
+
+        var devolution = devolutionRepository.findByLoan(loan);
+        if (devolution == null) {
+            return null;
+        }
+
+        return new DevolutionResponseDTO(devolution);
     }
 
     public Devolution findById(Long id){
@@ -64,5 +71,15 @@ public class DevolutionService {
         Devolution devolution = findById(id);
         devolutionRepository.delete(devolution);
     }
+
+    public List<DevolutionResponseDTO> findByUser(Long userId) {
+        var devolucoes = devolutionRepository.findAll().stream()
+                .filter(d -> d.getLoan().getUser().getId().equals(userId))
+                .map(DevolutionResponseDTO::new)
+                .toList();
+
+        return devolucoes;
+    }
+
 
 }

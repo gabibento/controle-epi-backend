@@ -29,11 +29,16 @@ public class DevolutionController {
     public Devolution findById(@PathVariable("id") Long id){ return devolutionService.findById(id);}
 
     @GetMapping("/loan/{id}")
-    public List<DevolutionResponseDTO> findByLoan(@PathVariable("id") Long id){
+    public DevolutionResponseDTO findByLoan(@PathVariable("id") Long id){
         return devolutionService.findByLoan(id);
     }
     @DeleteMapping
     public void removeDevolution (@RequestParam Long id){
         devolutionService.removeDevolution(id);
     }
+    @GetMapping("/user/{id}")
+    public List<DevolutionResponseDTO> findByUser(@PathVariable Long id) {
+        return devolutionService.findByUser(id);
+    }
+
 }
